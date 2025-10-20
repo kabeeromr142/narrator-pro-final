@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Narrator Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      @keyframes golden-pulse {
+        0%, 100% {
+          filter: drop-shadow(0 0 3px rgba(253, 224, 71, 0.4));
+        }
+        50% {
+          filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.8));
+        }
+      }
+      .animate-golden-pulse {
+        animation: golden-pulse 3s infinite ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+      .btn-glow:hover {
+        box-shadow: 0 0 12px 3px rgba(251, 191, 36, 0.4), 0 0 20px 8px rgba(251, 191, 36, 0.2);
+      }
+      @keyframes beat-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.5); }
+      }
+      .animate-beat-pulse {
+        animation: beat-pulse 2s infinite ease-in-out;
+      }
+      @keyframes active-beat-pulse {
+        0% { transform: scale(1.5); box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.9); background-color: white; }
+        50% { transform: scale(2.2); box-shadow: 0 0 14px 6px rgba(255, 255, 255, 0.7); }
+        100% { transform: scale(1); box-shadow: none; background-color: rgba(251, 191, 36, 0.8); }
+      }
+      .beat-active {
+        animation: active-beat-pulse 0.4s ease-out;
+      }
+      .waveform-pulse {
+        transform-origin: center;
+        animation: waveform-pulse-anim 0.4s ease-out;
+      }
+      @keyframes waveform-pulse-anim {
+        0% { transform: scaleY(1.2); }
+        70% { transform: scaleY(0.95); }
+        100% { transform: scaleY(1); }
+      }
+      .dial {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #111827;
+        border: 2px solid #374151;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.2s, height 0.2s;
+      }
+      .dial-ticks {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .dial-tick {
+        position: absolute;
+        width: 1px;
+        height: 5px;
+        background-color: #4b5563;
+        left: 50%;
+        top: 0;
+        transform-origin: 50% 40px; /* For 80px dial */
+        transition: transform-origin 0.2s;
+      }
+      .video-glow {
+        box-shadow: 0 0 15px 4px rgba(251, 191, 36, 0.5);
+      }
+      .video-zoom-sync-glow {
+        box-shadow: 0 0 25px 8px rgba(212, 175, 55, 0.7);
+        animation: golden-pulse 2.5s infinite;
+      }
+      @keyframes beat-video-pulse {
+        0% { transform: scale(var(--video-zoom-scale, 1)); box-shadow: none; }
+        50% { 
+          transform: scale(calc(var(--video-zoom-scale, 1) * var(--beat-pulse-scale, 1.03))); 
+          box-shadow: 0 0 30px 10px rgba(253, 224, 71, var(--beat-pulse-shadow-opacity, 0.6)); 
+        }
+        100% { transform: scale(var(--video-zoom-scale, 1)); box-shadow: none; }
+      }
+      .beat-video-pulse-active {
+        animation: beat-video-pulse 0.4s ease-out;
+      }
+      @media (max-width: 1023px) { /* lg breakpoint */
+        .dial {
+          width: 64px;
+          height: 64px;
+        }
+        .dial-tick {
+          transform-origin: 50% 32px; /* For 64px dial */
+        }
+      }
+    </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://unpkg.com/meyda@5.6.0/dist/meyda.min.js"></script>
+  <script
+      src="https://browser.sentry-cdn.com/8.18.0/bundle.min.js"
+      integrity="sha384-A/3fzL8S/621Tf6yGk3yL+3T5e27H5rJx0y22i3gaoADKz98jLtgj+5/piJ3aYSD"
+      crossorigin="anonymous"
+    ></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-black">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
